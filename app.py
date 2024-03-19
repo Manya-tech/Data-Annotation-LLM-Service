@@ -7,9 +7,9 @@ from langchain_experimental.agents.agent_toolkits import create_csv_agent
 from langchain_google_genai import ChatGoogleGenerativeAI
 import json
 
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 
-load_dotenv()  # take environment variables from .env.
+# load_dotenv()  # take environment variables from .env.
 
 import os
 
@@ -20,7 +20,7 @@ if not os.path.exists('temp_dir'):
 ## Function to load OpenAI model and get respones
 
 def get_gemini_response(prompt,data):
-    model = ChatGoogleGenerativeAI(model="gemini-pro",google_api_key=os.getenv("GOOGLE_API_KEY"))
+    model = ChatGoogleGenerativeAI(model="gemini-pro",google_api_key=st.secrets["GOOGLE_API_KEY"])
     agent = create_csv_agent(
             model, data, verbose=True)
     result=agent.run(prompt)
