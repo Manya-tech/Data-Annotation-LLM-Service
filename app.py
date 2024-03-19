@@ -69,7 +69,7 @@ input_prompt = """
                             },
                             "MissingValues": []
                         },
-                        "Description": ""
+                        "Description": "gender of participants"
                     },
                     "age": {
                         "Annotations": {
@@ -83,7 +83,7 @@ input_prompt = """
                             },
                             "MissingValues": []
                         },
-                        "Description": ""
+                        "Description": "age of the participants"
                     }
                 }\n
                 Now read the dataframe provided to you and generate its .json data dictionary having the exact format as the one provided in the example in a way that it appears formatted when i print it
