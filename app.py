@@ -85,7 +85,7 @@ input_prompt = """
                         "Description": "age of the participants"
                     }
                 }\n
-                Now read the dataframe provided to you and generate its .json data dictionary following format as the one provided in the example in a way that it appears formatted when i print it
+                Now analyze the dataframe provided to you and generate its .json data dictionary following format of the data dictionary provided in the example in a way that it appears formatted when i print it.
 
                """
 
