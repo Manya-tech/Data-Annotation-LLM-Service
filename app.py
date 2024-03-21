@@ -85,7 +85,7 @@ input_prompt = """
                         "Description": "age of the participants"
                     }
                 }\n
-                 Now read the dataframe provided to you and generate its .json data dictionary following the format given above. Generate decription for each column and look for missing values then make the data dictionary like the one in the given exmple.
+                 Now read the dataframe provided to you and generate its .json data dictionary following the format given above.
                """
 
 # Setting Streamlit page config
