@@ -86,7 +86,7 @@ input_prompt = """
                     }
                 }\n
                  Now read the dataframe provided to you and generate its .json data dictionary following the format given above.
-                 Make sure to generate description for each column.
+                 Make sure to generate description for each column and make a data dictionary like the one in the example.
                """
 
 # Setting Streamlit page config
