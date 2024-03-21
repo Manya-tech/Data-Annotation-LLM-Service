@@ -18,7 +18,6 @@ if not os.path.exists('temp_dir'):
 
 
 ## Function to load OpenAI model and get respones
-
 def get_gemini_response(prompt,data):
     model = ChatGoogleGenerativeAI(model="gemini-pro",google_api_key=st.secrets["google_api_key"])
     agent = create_csv_agent(
@@ -86,7 +85,7 @@ input_prompt = """
                         "Description": "age of the participants"
                     }
                 }\n
-                Now read the dataframe provided to you and generate its .json data dictionary having the exact format as the one provided in the example in a way that it appears formatted when i print it
+                 Now read the dataframe provided to you and generate its .json data dictionary following the format given above. Generate decription for each column and look for missing values then make the data dictionary like the one in the given exmple.
                """
 
 # Setting Streamlit page config
@@ -113,12 +112,12 @@ st.title("LLM Data Annotation  ✏️")
 st.write("An interactive tool to annotate your dataset, preview annotations, and save changes.")
 
 
-uploaded_file = st.file_uploader("Upload a dataset (CSV)", type="csv")
+uploaded_file = st.file_uploader("Upload a dataset (TSV)", type="tsv")
 
 if uploaded_file is not None:
     # Save the uploaded file to a local directory
     file_path = os.path.join('temp_dir', uploaded_file.name)
-    st.table(pd.read_csv(uploaded_file))
+    st.table(pd.read_csv(uploaded_file, sep='\t'))
 
     # Save the uploaded file to the file path
     with open(file_path, 'wb') as f:
@@ -130,18 +129,3 @@ if uploaded_file is not None:
         response=get_gemini_response(input_prompt,file_path)
         st.subheader("The .json data dictionary is")
         st.code(response)
-
-        
-        # df = pd.json_normalize(response)
-
-        # # Use st.data_editor to display the DataFrame
-        # edited_df = st.data_editor(df, key="json_editor")
-
-        # # Convert the edited DataFrame back to a JSON string
-        # edited_json_string = json.dumps(edited_df.to_dict(orient="records"), indent=4)
-        # st.download_button(
-        #     label="Download Edited JSON",
-        #     file_name="data.json",
-        #     mime="application/json",
-        #     data=response,
-        # )
