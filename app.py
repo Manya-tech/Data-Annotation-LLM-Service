@@ -19,7 +19,7 @@ if not os.path.exists('temp_dir'):
 
 ## Function to load OpenAI model and get respones
 def get_gemini_response(prompt,data):
-    model = ChatGoogleGenerativeAI(model="gemini-pro",google_api_key=st.secrets['googl_api_key'],verbose=True)
+    model = ChatGoogleGenerativeAI(model="gemini-pro",google_api_key=st.secrets['google_api_key'],verbose=True)
     agent = create_csv_agent(
             model, data,verbose=True)
     result=agent.run(prompt)
