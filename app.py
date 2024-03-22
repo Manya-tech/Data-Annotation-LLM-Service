@@ -19,9 +19,9 @@ if not os.path.exists('temp_dir'):
 
 ## Function to load OpenAI model and get respones
 def get_gemini_response(prompt,data):
-    model = ChatGoogleGenerativeAI(model="gemini-pro",google_api_key=st.secrets["google_api_key"])
+    model = ChatGoogleGenerativeAI(model="gemini-pro",google_api_key=st.secrets['googl_api_key'],verbose=True)
     agent = create_csv_agent(
-            model, data, verbose=True)
+            model, data,verbose=True)
     result=agent.run(prompt)
     print(type(result))
     print(result)
@@ -29,15 +29,16 @@ def get_gemini_response(prompt,data):
 
 
 input_prompt = """
-               You are an expert in annotating .tsv files.
-               You will receive input .tsv file &
-               you will have to analyze it and generate a .json data dictionary for that file. You will also identify missing values in the columns.\n
-               For example, the tsv file is\n
-               name,gender,age\n
-                manya,f,20\n
-                mama,f,41\n
-                shivi,m,10\n
-                rakesh,m,40\n
+               You are an expert in annotating phenological .tsv files.
+               You will receive as input a .tsv file &
+               you will have to generate a .json data dictionary for that tsv file in the same format used in the example I am providing you.\n
+               First check the contents of the dataframe and then generate the data dictionary.\n
+               For example, the tsv file is: \n
+               name, gender, age\n
+                manya,f, 20\n
+                mama, f ,41\n
+                shivi, m,10\n
+                rakesh, m, 40\n
                 The .json data dictionary will be :\n
                 {
                     "name": {
@@ -85,7 +86,7 @@ input_prompt = """
                         "Description": "age of the participants"
                     }
                 }\n
-                Now analyze the dataframe provided to you and generate its .json data dictionary following format of the data dictionary provided in the example in a way that it appears formatted when i print it.
+                Now analyze the dataframe provided to you, refer to the example and generate its .json data dictionary in a way that it appears formatted when I print it.
 
                """
 
@@ -118,7 +119,7 @@ uploaded_file = st.file_uploader("Upload a dataset (TSV)", type="tsv")
 if uploaded_file is not None:
     # Save the uploaded file to a local directory
     file_path = os.path.join('temp_dir', uploaded_file.name)
-    st.table(pd.read_csv(uploaded_file, sep='\t'))
+    st.table(pd.read_csv(uploaded_file,sep='\t'))
 
     # Save the uploaded file to the file path
     with open(file_path, 'wb') as f:
